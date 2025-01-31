@@ -67,17 +67,48 @@ public class MyWindow extends JFrame
 		
 		// Lambda Expression
 		
-		Timer timer = new Timer(1000, (e)->{
-									//			String date = new Date().toString(); 
-											//	String date = new Date().toLocaleString(); 
-						
-									Date d = new Date();
-									SimpleDateFormat sdf = new SimpleDateFormat(" hh : mm : ss a");
-									  String date =sdf.format(d);
-									  
-												clockLabel.setText(date);
-											});
-		timer.start();
+//		Timer timer = new Timer(1000, (e)->{
+//									//			String date = new Date().toString(); 
+//											//	String date = new Date().toLocaleString(); 
+//						
+//									Date d = new Date();
+//									SimpleDateFormat sdf = new SimpleDateFormat(" hh : mm : ss a");
+//									  String date =sdf.format(d);
+//									  
+//												clockLabel.setText(date);
+//											});
+//		timer.start();
+//		
+		
+		
+		//==========================================================================
+		
+		//By the help of Thread.
+		
+		Thread thread = new Thread(()->{
+			try 
+			{
+				while(true)
+				{
+					Date d = new Date();
+					
+					SimpleDateFormat sdf = new SimpleDateFormat(" hh : mm : ss a");
+					  String date =sdf.format(d);
+					  
+					clockLabel.setText(date);
+					
+				//	Thread.sleep(1000);
+					
+					Thread.currentThread().sleep(1000);
+				}
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+			}
+		});
+		
+		thread.start();
 		
 	}
 	
