@@ -1,10 +1,17 @@
 package tik_tak_toe;
 
+import java.awt.BorderLayout;
+import java.awt.Font;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class MyGame extends JFrame
 {
+	
+	JLabel heading;
+	Font font = new Font(null);
 	
 	public MyGame() 
 	{
@@ -17,9 +24,16 @@ public class MyGame extends JFrame
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		createGUI();
+		
 		setVisible(true);
 	}
 	
 	
+	private void createGUI()
+	{
+		this.setLayout(new BorderLayout());
+		
+	}
 	 
 } 
