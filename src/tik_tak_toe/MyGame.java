@@ -44,6 +44,8 @@ public class MyGame extends JFrame implements ActionListener
 	
 	int winnerPlayer = 2;
 	
+	boolean gameOver = false;
+	
 	Font font = new Font("", Font.BOLD, 40);
 	
 	
@@ -165,6 +167,14 @@ public class MyGame extends JFrame implements ActionListener
 		
 		int name = Integer.parseInt(nameStr.trim());
 		
+	
+		if (gameOver) 
+		{
+		JOptionPane.showMessageDialog(this, "Game Over " );
+			return;
+		}
+		
+		
 		if(gameChances[name]==2 )
 		{
 			if (activePlayer == 1)
@@ -192,6 +202,9 @@ public class MyGame extends JFrame implements ActionListener
 				{
 					winnerPlayer = gameChances[temp[0]];
 					
+					gameOver = true;
+					
+					
 					JOptionPane.showMessageDialog(null, "Player "+ winnerPlayer + " has won the game" );
 					int i = JOptionPane.showConfirmDialog(this, "Do you want to play more ?? " );
 					
@@ -214,11 +227,47 @@ public class MyGame extends JFrame implements ActionListener
 				}
 			}
 			
+			// draw logic
+			
+			int count = 0;
+			for(int x : gameChances)
+			{
+				if(x == 2)
+				{
+					count++;
+					break;
+				}
+			}
+			
+			if(count ==0 && gameOver == false)
+			{
+				JOptionPane.showMessageDialog(this, "Match draw");
+				
+				int i = JOptionPane.showConfirmDialog(this, "Do you want to play more ?? " );
+				
+				if(i==0)
+				{
+					this.setVisible(false);
+					new MyGame();
+					
+				}
+				else if(i == 1)
+				{
+					System.exit(34234);
+				}
+				else
+				{
+					System.exit(123);
+				}
+			}
+			
 			
 		}
 		else
 		{
 			JOptionPane.showMessageDialog(this, "position already occupied");
+			
+			
 		}
 		
 		
