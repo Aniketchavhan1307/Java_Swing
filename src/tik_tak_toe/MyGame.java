@@ -259,6 +259,9 @@ public class MyGame extends JFrame implements ActionListener
 				{
 					System.exit(123);
 				}
+				
+				
+				gameOver = true;
 			}
 			
 			
