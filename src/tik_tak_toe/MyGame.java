@@ -4,16 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class MyGame extends JFrame
+public class MyGame extends JFrame implements ActionListener
 {
 	
 	JLabel heading, clock;
@@ -21,13 +24,21 @@ public class MyGame extends JFrame
 	
 	JButton [] jbutton = new JButton[9];
 	
+	// game instance variable
+	
+	int gameChances[]  = {2,2,2,2,2,2,2,2,2};
+	int activePlayer = 0;
+	
+	
+	
+	
 	Font font = new Font("", Font.BOLD, 40);
 	
 	
 	public MyGame() 
 	{
 		setTitle("My Tic Tac Toe Game");
-		setSize(550,550);
+		setSize(600,600);
 		setLocation(200, 200);
 		
 		ImageIcon icon = new ImageIcon("src\\img\\xo.jpg");
@@ -116,16 +127,51 @@ public class MyGame extends JFrame
 			
 			btn.setBackground(Color.decode("#90caf9"));
 			
-			btn.setIcon(new ImageIcon("src/img/o.png"));
+		//	btn.setIcon(new ImageIcon("src/img/o.png"));
+			
 			btn.setFont(font);
 			
 			mainPanel.add(btn);
 			
 			jbutton[i-1] = btn;
+			btn.addActionListener(this);
+			btn.setName(String.valueOf(i-1));
+			
 		}
 		
 		this.add(mainPanel,  BorderLayout.CENTER);
 		
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		JButton  currentButton =(JButton) e.getSource();
+		
+		String nameStr = currentButton.getName();
+		
+		int name = Integer.parseInt(nameStr.trim());
+		
+		if(gameChances[name]==2 )
+		{
+			if (activePlayer == 1)
+			{
+				currentButton.setIcon(new ImageIcon("src/img/x.png"));
+				
+				activePlayer = 0;
+			}
+			else
+			{
+				currentButton.setIcon(new ImageIcon("src/img/o.png"));
+				
+				activePlayer = 1;
+			}
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(this, "position already occupied");
+		}
 	}
 	 
 } 

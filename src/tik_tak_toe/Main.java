@@ -7,5 +7,7 @@ public class Main
 		System.out.println("\tAniket");
 		
 		MyGame game = new MyGame();
+		
+		
 	}
 }
