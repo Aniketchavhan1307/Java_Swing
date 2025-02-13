@@ -29,8 +29,20 @@ public class MyGame extends JFrame implements ActionListener
 	int gameChances[]  = {2,2,2,2,2,2,2,2,2};
 	int activePlayer = 0;
 	
+	int winner[][] = {
+						{0,1,2},
+						{3,4,5},
+						{6,7,8},
+						{0,3,6},
+						{1,4,7},
+						{2,5,7},
+						{0,4,8},
+						{2,4,6},
+			
+					};
 	
 	
+	int winnerPlayer = 2;
 	
 	Font font = new Font("", Font.BOLD, 40);
 	
@@ -159,19 +171,59 @@ public class MyGame extends JFrame implements ActionListener
 			{
 				currentButton.setIcon(new ImageIcon("src/img/x.png"));
 				
+				gameChances[name] = activePlayer;
 				activePlayer = 0;
 			}
 			else
 			{
 				currentButton.setIcon(new ImageIcon("src/img/o.png"));
 				
+				gameChances[name] = activePlayer;
 				activePlayer = 1;
 			}
+			
+			// finding winner...
+			
+			for (int temp[] : winner) 
+			{
+				if((gameChances[temp[0]]==gameChances[temp[1]]) &&
+						(gameChances[temp[1]]==gameChances[temp[2]]) &&
+						gameChances[temp[2]] != 2)
+				{
+					winnerPlayer = gameChances[temp[0]];
+					
+					JOptionPane.showMessageDialog(null, "Player "+ winnerPlayer + " has won the game" );
+					int i = JOptionPane.showConfirmDialog(this, "Do you want to play more ?? " );
+					
+					if(i==0)
+					{
+						this.setVisible(false);
+						new MyGame();
+						
+					}
+					else if(i == 1)
+					{
+						System.exit(34234);
+					}
+					else
+					{
+						System.exit(123);
+					}
+					
+					break;
+				}
+			}
+			
+			
 		}
 		else
 		{
 			JOptionPane.showMessageDialog(this, "position already occupied");
 		}
+		
+		
+		
+		
 	}
 	 
 } 
